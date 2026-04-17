@@ -4,19 +4,12 @@
   <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
 </head>
 <body>
-  <div id="result">chargement...</div>
+  <pre id="result">chargement...</pre>
   <script>
-    grist.ready({
-      onEditOptions() {}
-    });
-
-    // méthode alternative
-    grist.on('message', (msg) => {
-      document.getElementById('result').textContent = JSON.stringify(msg, null, 2);
-    });
+    grist.ready();
 
     grist.onRecord((record, mappings) => {
-      document.getElementById('result').textContent = 'onRecord reçu';
+      document.getElementById('result').textContent = JSON.stringify({record, mappings}, null, 2);
     });
   </script>
 </body>
