@@ -9,7 +9,10 @@
     grist.ready();
 
     grist.docApi.getAccessToken({readOnly: true}).then(token => {
-      document.getElementById('result').textContent = JSON.stringify(token, null, 2);
+      const url = token.baseUrl + '/access?auth=' + token.token;
+      return fetch(url);
+    }).then(r => r.json()).then(data => {
+      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
     }).catch(err => {
       document.getElementById('result').textContent = 'erreur: ' + err;
     });
