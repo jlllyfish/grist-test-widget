@@ -8,8 +8,14 @@
   <script>
     grist.ready();
 
-    grist.onRecord((record, mappings) => {
-      document.getElementById('result').textContent = JSON.stringify({record, mappings}, null, 2);
+    grist.docApi.getAccessToken({readOnly: true}).then(token => {
+      return fetch(token.baseUrl + '/access', {
+        headers: {'Authorization': 'Bearer ' + token.token}
+      });
+    }).then(r => r.json()).then(data => {
+      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+    }).catch(err => {
+      document.getElementById('result').textContent = 'erreur: ' + err;
     });
   </script>
 </body>
