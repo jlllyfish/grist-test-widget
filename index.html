@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+</head>
+<body>
+  <div id="result">chargement...</div>
+  <script>
+    grist.ready();
+    grist.getUser().then(user => {
+      document.getElementById('result').textContent = JSON.stringify(user, null, 2);
+    });
+  </script>
+</body>
+</html>
