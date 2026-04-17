@@ -6,9 +6,16 @@
 <body>
   <div id="result">chargement...</div>
   <script>
+    document.getElementById('result').textContent = 'script chargé';
+    
     grist.ready();
+    
+    document.getElementById('result').textContent = 'grist.ready() appelé';
+
     grist.getUser().then(user => {
       document.getElementById('result').textContent = JSON.stringify(user, null, 2);
+    }).catch(err => {
+      document.getElementById('result').textContent = 'erreur: ' + err;
     });
   </script>
 </body>
